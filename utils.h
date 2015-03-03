@@ -7,13 +7,16 @@
 #define TOP 1.0
 #define BOTTOM 1.0
 #define EPSILON 1.0
-#define MIDDLE 55.5
+#define MIDDLE 0.0
 
 
 double **matrix;
+double left, right, top, bottom, middle, epsilon;
+int dimension, total_processes;
 
-void createMatrix(int );
-void destroyMatrix(int );
-void printMatrix(int);
+void createMatrix( );
+void destroyMatrix( );
+void handleInput(int, char**);
+void printMatrix( );
 
 
