@@ -7,9 +7,12 @@
 void createMatrix( ) {
   
   matrix = (double**)malloc(sizeof(double*) * dimension);
+  newmatrix = (double**)malloc(sizeof(double*) * dimension);
   
-  for (int i = 0; i < dimension; i++) 
+  for (int i = 0; i < dimension; i++) {
     matrix[i] = (double*)malloc(sizeof(double) * dimension);
+    newmatrix[i] = (double*)malloc(sizeof(double) * dimension);
+  }
   
   //left, right
   for (int i = 0; i < dimension; i++) {
@@ -44,10 +47,12 @@ void printMatrix( ) {
 }
 void destroyMatrix( ) {
   
-  for (int i = 0; i < dimension; i++) 
+  for (int i = 0; i < dimension; i++) {
     free(matrix[i]);
-  
+    free(newmatrix[i]);
+  }
   free(matrix);
+  free(newmatrix);
   
 }
 
@@ -107,5 +112,13 @@ void handleInput(int argc, char **argv) {
   middle = MIDDLE;
   dimension = atoi(argv[1]);
   total_processes = atoi(argv[2]);
+  
+}
+
+
+double dabs(double a) {
+  
+  if (a < 0.000000000) return -a;
+  else return a;
   
 }
