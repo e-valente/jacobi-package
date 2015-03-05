@@ -21,5 +21,7 @@ void destroyMatrix( );
 void handleInput(int, char**);
 void printMatrix( );
 double dabs(double);
+void printStatus();
+void calculateDeltaTime(struct timeval start, struct timeval end, struct timeval *res);
 
 

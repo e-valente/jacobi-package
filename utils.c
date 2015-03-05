@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/time.h>
 
 #include "utils.h"
 
@@ -120,5 +121,33 @@ double dabs(double a) {
   
   if (a < 0.000000000) return -a;
   else return a;
+  
+}
+void printStatus() {
+  
+  fprintf(stdout, "%-8s = %d x %d\n", "Grid", dimension, dimension);
+  fprintf(stdout, "%-8s = %d\n", "numProcs", total_processes);
+  fprintf(stdout, "%-8s = %.4lf\n", "left", left);
+  fprintf(stdout, "%-8s = %.4lf\n", "right", right);
+  fprintf(stdout, "%-8s = %.4lf\n", "top", top);
+  fprintf(stdout, "%-8s = %.4lf\n", "bottom", bottom);
+  fprintf(stdout, "%-8s = %.4lf\n", "epsilon", epsilon);  
+  fprintf(stdout, "\n\n");
+}
+
+void calculateDeltaTime(struct timeval start, struct timeval end, struct timeval *res) {
+  int seconds;
+  int usecs;
+  
+  seconds = end.tv_sec - start.tv_sec;
+  usecs = end.tv_usec - start.tv_usec;
+  
+  if(end.tv_usec < start.tv_usec) {
+    seconds--;
+    usecs += 1000000;
+  }
+  
+  res->tv_sec = seconds;
+  res->tv_usec = usecs;
   
 }

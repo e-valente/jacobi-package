@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/param.h>
+#include <sys/time.h>
+
 
 #include "utils.h"
+#include "jacobi-sequential.h"
 
 extern int total_processes, dimension;
 
 int main(int argc, char **argv) {
-  int i, j, k;
-  double maxdiff;
+  struct timeval startTime, endTime, responseTime;
     
   if (argc < 3) {
-    fprintf (stderr, "Usage: %s <dimension> <number of processes> [left, top, right, EPSILON] \n", argv[0]);
+    fprintf (stderr, "Usage: %s <dimension> <number of processes> [left, right, top, bottom, EPSILON] \n", argv[0]);
     exit(1);
     
   }
@@ -19,35 +20,17 @@ int main(int argc, char **argv) {
   handleInput(argc, argv);
   createMatrix(dimension);
   
+  gettimeofday(&startTime, NULL);
   /****Jacobi Execution***/
-  for(k = 0; k < MAXITERS; k++) {
-    /*compute new values for all interior points*/
-    for(i = 1; i < dimension -1; i++) { 
-      for(j = 1; j < dimension -1; j++)
-	newmatrix[i][j] = (matrix[i-1][j] + matrix[i+1][j] +
-		      matrix[i][j-1] + matrix[i][j+1]) / 4;
-      
-    }
-    
-    maxdiff = 0.0;
-    
-    for(i = 1; i < dimension -1; i++) { 
-      for(j = 1; j < dimension -1; j++)
-	maxdiff = MAX(maxdiff, dabs(newmatrix[i][j] - matrix[i][j]));
-    }
-    
-    /*check for termination*/
-    if(maxdiff < epsilon)
-      break;
-    
-    /*copy new grid to prepare for new update*/
-    for(i = 1; i < dimension -1; i++) { 
-     for(j = 1; j < dimension -1; j++)
-	matrix[i][j] = newmatrix[i][j];
-    }    
-    
-  }
+  jacobi_sequential();
+  gettimeofday(&endTime, NULL);
+
   
+  printStatus();
+  calculateDeltaTime(startTime, endTime, &responseTime);
+  fprintf(stdout, "%s = %ld seconds, %ld microseconds\n", "execution time", responseTime.tv_sec, responseTime.tv_usec);
+
+ 
   printMatrix(dimension);
   destroyMatrix(dimension);
   return 0;
