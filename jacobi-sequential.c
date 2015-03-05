@@ -1,10 +1,11 @@
 #include <sys/param.h>
+#include <stdio.h>
 
 #include "utils.h"
 #include "jacobi-sequential.h"
 
 
-void jacobi_sequential() {
+int jacobi_sequential() {
   int i, j, k;
   double maxdiff;
   
@@ -34,6 +35,9 @@ void jacobi_sequential() {
     }    
     
   }
+  
+  return k; /*iters*/
 }
+
   
   

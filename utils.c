@@ -65,7 +65,8 @@ void handleInput(int argc, char **argv) {
       right = atoi(argv[4]) * 1.0;
       top = atoi(argv[5]) * 1.0;
       bottom = atoi(argv[6]) * 1.0;
-      epsilon = atoi(argv[7]) * 1.0;
+      epsilon = atof(argv[7]) * 1.0;
+      
       break;
       
     case 7:
@@ -123,7 +124,7 @@ double dabs(double a) {
   else return a;
   
 }
-void printStatus() {
+void printAttributes() {
   
   fprintf(stdout, "%-8s = %d x %d\n", "Grid", dimension, dimension);
   fprintf(stdout, "%-8s = %d\n", "numProcs", total_processes);
@@ -132,7 +133,8 @@ void printStatus() {
   fprintf(stdout, "%-8s = %.4lf\n", "top", top);
   fprintf(stdout, "%-8s = %.4lf\n", "bottom", bottom);
   fprintf(stdout, "%-8s = %.4lf\n", "epsilon", epsilon);  
-  fprintf(stdout, "\n\n");
+  fprintf(stdout, "%-8s = %d\n", "MaxIters", MAXITERS);  
+  fprintf(stdout, "\n");
 }
 
 void calculateDeltaTime(struct timeval start, struct timeval end, struct timeval *res) {

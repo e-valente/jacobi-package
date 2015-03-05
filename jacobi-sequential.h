@@ -4,4 +4,5 @@
 
 #include "utils.h"
 
-void jacobi_sequential();
+/*return total iters used*/
+int jacobi_sequential();
