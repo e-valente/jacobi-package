@@ -2,11 +2,13 @@
 #define _UTILS_H
 #endif
 
+#include <stdio.h>
+
 #define LEFT 1.0
 #define RIGHT 1.0
 #define TOP 1.0
 #define BOTTOM 1.0
-#define EPSILON 0.1
+#define EPSILON 0.01
 #define MIDDLE 0.0
 #define MAXITERS 100000
 

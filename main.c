@@ -22,10 +22,11 @@ int main(int argc, char **argv) {
   handleInput(argc, argv);
   createMatrix(dimension);
   
-  
+  pthread_barrier_init(&our_barrier,NULL,total_processes);
   /****Jacobi Thread Execution***/
   gettimeofday(&startTime, NULL);
   total_iters = jacobi_thread();
+  pthread_barrier_destroy(&our_barrier);
   gettimeofday(&endTime, NULL);
   /************************/
   
@@ -42,7 +43,7 @@ int main(int argc, char **argv) {
   calculateDeltaTime(startTime, endTime, &responseTime);
   fprintf(outputFile, "%s = %ld seconds, %ld microseconds\n\n", \
     "Execution Time", responseTime.tv_sec, responseTime.tv_usec);
-  //printMatrix(outputFile);
+  printMatrix(outputFile);
   
   /*close file descriptors and 
    * free memory*/

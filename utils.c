@@ -19,16 +19,22 @@ void createMatrix( ) {
   for (int i = 0; i < dimension; i++) {
     //left
     matrix[i][0] = left;
+    newmatrix[i][0] = left;
     //right
     matrix[i][dimension -1] = right; 
+    newmatrix[i][dimension -1] = right; 
     //top
     matrix[0][i] = top;
+    newmatrix[0][i] = top;
     //bottom
     matrix[dimension -1][i] = bottom;
+    newmatrix[dimension -1][i] = bottom;
     
     if ((i > 0) && (i < dimension -1)) {
-    for(int j = 1; j < dimension -1; j++) 
-      matrix[i][j] = middle;
+      for(int j = 1; j < dimension -1; j++) {
+	matrix[i][j] = middle;
+	newmatrix[i][j] = middle;
+      }
     }
       
   }
