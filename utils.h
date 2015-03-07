@@ -19,9 +19,9 @@ int dimension, total_processes;
 void createMatrix( );
 void destroyMatrix( );
 void handleInput(int, char**);
-void printMatrix( );
+void printMatrix(FILE*);
 double dabs(double);
-void printAttributes();
+void printAttributes(FILE*);
 void calculateDeltaTime(struct timeval start, struct timeval end, struct timeval *res);
 
 

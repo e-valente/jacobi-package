@@ -35,12 +35,12 @@ void createMatrix( ) {
   
 }
 
-void printMatrix( ) {
+void printMatrix(FILE* fp) {
   
   for (int i = 0; i < dimension; i++) {
     for (int j = 0; j < dimension; j++)
-      printf("%lf ", matrix[i][j]);
-    printf("\n");
+      fprintf(fp, "%lf ", matrix[i][j]);
+    fprintf(fp, "\n");
   }
    
   
@@ -124,17 +124,17 @@ double dabs(double a) {
   else return a;
   
 }
-void printAttributes() {
+void printAttributes(FILE* fp) {
   
-  fprintf(stdout, "%-8s = %d x %d\n", "Grid", dimension, dimension);
-  fprintf(stdout, "%-8s = %d\n", "numProcs", total_processes);
-  fprintf(stdout, "%-8s = %.4lf\n", "left", left);
-  fprintf(stdout, "%-8s = %.4lf\n", "right", right);
-  fprintf(stdout, "%-8s = %.4lf\n", "top", top);
-  fprintf(stdout, "%-8s = %.4lf\n", "bottom", bottom);
-  fprintf(stdout, "%-8s = %.4lf\n", "epsilon", epsilon);  
-  fprintf(stdout, "%-8s = %d\n", "MaxIters", MAXITERS);  
-  fprintf(stdout, "\n");
+  fprintf(fp, "%-8s = %d x %d\n", "Grid", dimension, dimension);
+  fprintf(fp, "%-8s = %d\n", "numProcs", total_processes);
+  fprintf(fp, "%-8s = %.4lf\n", "left", left);
+  fprintf(fp, "%-8s = %.4lf\n", "right", right);
+  fprintf(fp, "%-8s = %.4lf\n", "top", top);
+  fprintf(fp, "%-8s = %.4lf\n", "bottom", bottom);
+  fprintf(fp, "%-8s = %.4lf\n", "epsilon", epsilon);  
+  fprintf(fp, "%-8s = %d\n", "MaxIters", MAXITERS);  
+  fprintf(fp, "\n");
 }
 
 void calculateDeltaTime(struct timeval start, struct timeval end, struct timeval *res) {
